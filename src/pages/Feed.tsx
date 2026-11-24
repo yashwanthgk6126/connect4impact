@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
-import { POST_SELECT, fetchLikedPostIds } from '../lib/queries'
-import type { Post, PostType } from '../lib/types'
+import { EVENT_SELECT, POST_SELECT, fetchLikedPostIds } from '../lib/queries'
+import type { EventRow, Post, PostType } from '../lib/types'
+import { formatDate } from '../lib/format'
 import { POST_TYPES } from '../lib/constants'
 import { useAuth } from '../context/AuthContext'
 import PostCard from '../components/PostCard'
@@ -19,7 +20,13 @@ export default function Feed() {
   const [filter, setFilter] = useState<PostType | 'all'>('all')
   const [loading, setLoading] = useState(true)
   const [hasMore, setHasMore] = useState(false)
+  const [upcoming, setUpcoming] = useState<EventRow[]>([])
   const userId = session?.user.id
+
+  useEffect(() => {
+    supabase.from('events').select(EVENT_SELECT).eq('status', 'published').gte('start_at', new Date().toISOString())
+      .order('start_at').limit(4).then(({ data }) => setUpcoming((data as EventRow[]) ?? []))
+  }, [])
 
   const load = useCallback(
     async (offset = 0) => {
@@ -50,8 +57,8 @@ export default function Feed() {
     <div className="grid gap-6 lg:grid-cols-[1fr_300px]">
       <div className="space-y-4">
         <div>
-          <h1 className="text-2xl font-bold">Community Feed</h1>
-          <p className="text-slate-600">Announcements, photographs, updates, volunteering calls and help requests from the community.</p>
+          <h1 className="text-2xl font-bold">Home</h1>
+          <p className="text-slate-600">Share and browse community activities, announcements, photographs, volunteering calls and help requests.</p>
         </div>
         {canParticipate ? <PostComposer onCreated={() => load(0)} /> : !session ? <JoinPrompt action="post, like and comment" /> : null}
         <div className="flex flex-wrap gap-2">
@@ -97,10 +104,22 @@ export default function Feed() {
           <p className="mb-3 text-sm text-brand-50">Find tree plantations, food drives, blood donation camps and more near you.</p>
           <Link to="/explore" className="btn bg-white text-brand-700 hover:bg-brand-50">Explore Activities</Link>
         </div>
+        <div className="card space-y-3">
+          <h2 className="font-semibold">Upcoming activities</h2>
+          {upcoming.length === 0 ? (
+            <p className="text-sm text-slate-500">No upcoming activities yet.</p>
+          ) : upcoming.map((e) => (
+            <Link key={e.id} to={`/events/${e.id}`} className="block rounded-lg p-2 hover:bg-slate-50">
+              <div className="text-sm font-medium">{e.title}</div>
+              <div className="text-xs text-slate-500">{e.location} · {formatDate(e.start_at)}</div>
+            </Link>
+          ))}
+          <Link to="/explore" className="block text-sm text-brand-700 hover:underline">See all activities →</Link>
+        </div>
         {canParticipate && (
           <div className="card space-y-2 text-sm">
             <h2 className="font-semibold">Quick actions</h2>
-            <Link to="/dashboard/host-event" className="block text-brand-700 hover:underline">📅 Host an event</Link>
+            <Link to="/host/new" className="block text-brand-700 hover:underline">📅 Host an event</Link>
             <Link to="/dashboard/food" className="block text-brand-700 hover:underline">🍱 Donate or request food</Link>
             <Link to="/dashboard/issues" className="block text-brand-700 hover:underline">🚧 Report a local issue</Link>
             <Link to="/dashboard/polls" className="block text-brand-700 hover:underline">🗳️ Start a civic poll</Link>

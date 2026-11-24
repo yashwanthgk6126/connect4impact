@@ -54,7 +54,7 @@ export default function MyActivities() {
         <div className="card text-slate-500">You haven't joined any activities. <Link to="/explore" className="text-brand-700 underline">Explore activities</Link></div>
       ) : <div className="grid gap-4 sm:grid-cols-2">{joined.map((e) => <EventCard key={e.id} event={e} />)}</div>)}
       {tab === 'hosted' && (hosted.length === 0 ? (
-        <div className="card text-slate-500">You haven't hosted any events. <Link to="/dashboard/host-event" className="text-brand-700 underline">Host one now</Link></div>
+        <div className="card text-slate-500">You haven't hosted any events. <Link to="/host/new" className="text-brand-700 underline">Host one now</Link></div>
       ) : <div className="grid gap-4 sm:grid-cols-2">{hosted.map((e) => <EventCard key={e.id} event={e} />)}</div>)}
       {tab === 'posts' && (posts.length === 0 ? (
         <div className="card text-slate-500">No posts yet. <Link to="/dashboard/create-post" className="text-brand-700 underline">Create a post</Link></div>

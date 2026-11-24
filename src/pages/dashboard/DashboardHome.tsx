@@ -30,7 +30,7 @@ export default function DashboardHome() {
 
   const actions = [
     ['/dashboard/create-post', '✍️', 'Create a post', 'Share updates, photographs and announcements'],
-    ['/dashboard/host-event', '📅', 'Host an event', 'Organize an activity — it appears in Explore and the Feed'],
+    ['/host/new', '📅', 'Host an event', 'Organize an activity — it appears in Explore and the Feed'],
     ['/dashboard/volunteer', '🙋', 'Volunteer Hub', 'Find activities that need volunteers'],
     ['/dashboard/food', '🍱', 'Food Donation', 'Redistribute surplus food or request help'],
     ['/dashboard/issues', '🚧', 'Issue Reporting', 'Flag local problems like potholes or garbage'],

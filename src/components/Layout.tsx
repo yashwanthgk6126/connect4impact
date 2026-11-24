@@ -29,8 +29,10 @@ export default function Layout() {
             Connect4Impact
           </Link>
           <nav className="flex flex-1 flex-wrap items-center gap-1">
-            <NavLink to="/" end className={navClass}>Community Feed</NavLink>
+            <NavLink to="/" end className={navClass}>Home</NavLink>
             <NavLink to="/explore" className={navClass}>Explore Activities</NavLink>
+            {session && <NavLink to="/host" className={navClass}>Host Events</NavLink>}
+            {session && <NavLink to="/participate" className={navClass}>Participate</NavLink>}
             {session && <NavLink to="/dashboard" className={navClass}>Dashboard</NavLink>}
             {isAdmin && <NavLink to="/admin" className={navClass}>Admin</NavLink>}
           </nav>

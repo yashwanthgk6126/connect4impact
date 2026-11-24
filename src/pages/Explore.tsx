@@ -50,7 +50,7 @@ export default function Explore() {
           <h1 className="text-2xl font-bold">Explore Activities</h1>
           <p className="text-slate-600">Organized activities and events you can join.</p>
         </div>
-        {canParticipate && <Link to="/dashboard/host-event" className="btn-primary">+ Host an event</Link>}
+        {canParticipate && <Link to="/host/new" className="btn-primary">+ Host an event</Link>}
       </div>
 
       <div className="card grid gap-3 md:grid-cols-5">

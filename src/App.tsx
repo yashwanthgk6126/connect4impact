@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import Layout from './components/Layout'
 import RequireAuth from './components/RequireAuth'
@@ -18,6 +18,8 @@ import CivicPolls from './pages/dashboard/CivicPolls'
 import ImpactAI from './pages/dashboard/ImpactAI'
 import MyActivities from './pages/dashboard/MyActivities'
 import MyProfile from './pages/dashboard/MyProfile'
+import HostDashboard from './pages/host/HostDashboard'
+import ParticipateDashboard from './pages/host/ParticipateDashboard'
 import AdminLayout from './pages/admin/AdminLayout'
 import AdminReports from './pages/admin/AdminReports'
 import AdminUsers from './pages/admin/AdminUsers'
@@ -35,10 +37,13 @@ export default function App() {
             <Route path="events/:id/edit" element={<RequireAuth><HostEvent /></RequireAuth>} />
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
+            <Route path="host" element={<RequireAuth><HostDashboard /></RequireAuth>} />
+            <Route path="host/new" element={<RequireAuth><HostEvent /></RequireAuth>} />
+            <Route path="participate" element={<RequireAuth><ParticipateDashboard /></RequireAuth>} />
             <Route path="dashboard" element={<RequireAuth><DashboardLayout /></RequireAuth>}>
               <Route index element={<DashboardHome />} />
               <Route path="create-post" element={<CreatePost />} />
-              <Route path="host-event" element={<HostEvent />} />
+              <Route path="host-event" element={<Navigate to="/host/new" replace />} />
               <Route path="volunteer" element={<VolunteerHub />} />
               <Route path="food" element={<FoodDonation />} />
               <Route path="issues" element={<IssueReporting />} />

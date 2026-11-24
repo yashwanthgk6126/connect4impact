@@ -3,7 +3,8 @@ import { NavLink, Outlet } from 'react-router-dom'
 const links = [
   ['/dashboard', 'Overview', '🏠'],
   ['/dashboard/create-post', 'Create Post', '✍️'],
-  ['/dashboard/host-event', 'Host Event', '📅'],
+  ['/host', 'Host Dashboard', '📅'],
+  ['/participate', 'Participate', '🤝'],
   ['/dashboard/volunteer', 'Volunteer Hub', '🙋'],
   ['/dashboard/food', 'Food Donation', '🍱'],
   ['/dashboard/issues', 'Issue Reporting', '🚧'],

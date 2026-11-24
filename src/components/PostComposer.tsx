@@ -65,7 +65,7 @@ export default function PostComposer({ onCreated, defaultType = 'update' }: { on
             {POST_TYPES[t].label}
           </button>
         ))}
-        <Link to="/dashboard/host-event" className="chip border border-dashed border-brand-600 px-3 py-1 text-brand-700">
+        <Link to="/host/new" className="chip border border-dashed border-brand-600 px-3 py-1 text-brand-700">
           + Host an event
         </Link>
       </div>
