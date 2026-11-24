@@ -407,3 +407,9 @@ create policy "Registered users upload media" on storage.objects for insert to a
   with check (bucket_id = 'media' and (storage.foldername(name))[1] = auth.uid()::text and public.is_active_user());
 create policy "Owners and admins delete media" on storage.objects for delete to authenticated
   using (bucket_id = 'media' and ((storage.foldername(name))[1] = auth.uid()::text or public.is_admin()));
+
+-- Backfill profiles for accounts created before this migration ran.
+insert into public.profiles (id, full_name, location)
+select u.id, coalesce(u.raw_user_meta_data->>'full_name', split_part(u.email, '@', 1)), u.raw_user_meta_data->>'location'
+from auth.users u
+on conflict (id) do nothing;
