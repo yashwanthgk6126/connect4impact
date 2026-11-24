@@ -36,7 +36,7 @@ Access rules (enforced in Postgres, not just the UI):
 
 1. Create a project at https://supabase.com.
 2. In **SQL Editor**, run `supabase/migrations/20261124000000_init.sql` (or `supabase link --project-ref <ref> && supabase db push`).
-3. Optional demo data: run `supabase/seed.sql` (creates Rahul, Priya, Arun and an admin; password `Demo@1234`).
+3. The database starts empty. Create your account, then promote yourself to admin with the SQL below. (`supabase/tests/fixtures.sql` holds sample users/content used only by `scripts/rls-test.mjs` locally.)
 4. Copy `.env.example` to `.env.local` and fill in your project URL and anon key (Project Settings → API).
 5. `npm install && npm run dev`.
 
@@ -55,7 +55,7 @@ where id = (select id from auth.users where email = 'you@example.com');
 
 ```bash
 supabase start          # requires Docker
-supabase db reset       # applies migration + seed
+supabase db reset       # applies migration (empty database)
 cp .env.example .env.local   # use the API URL and anon key printed by `supabase status`
 npm install
 npm run dev

@@ -1,3 +1,4 @@
+// Requires test fixtures: psql "$DB_URL" -f supabase/tests/fixtures.sql (local only, never production).
 // Access-policy checks against a local `supabase db reset` database (Node 22+).
 // Usage: SUPABASE_ANON_KEY=... node scripts/rls-test.mjs
 import { createClient } from '@supabase/supabase-js'
