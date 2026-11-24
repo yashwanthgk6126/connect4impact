@@ -16,7 +16,7 @@ const links = [
 
 export default function DashboardLayout() {
   return (
-    <div className="grid gap-6 md:grid-cols-[220px_1fr]">
+    <div className="grid gap-6 md:grid-cols-[220px_1fr] xl:grid-cols-[240px_1fr] xl:gap-8">
       <aside className="md:sticky md:top-20 md:self-start">
         <nav className="card flex gap-1 overflow-x-auto p-2 md:flex-col">
           {links.map(([to, label, icon]) => (

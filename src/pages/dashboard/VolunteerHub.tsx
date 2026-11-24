@@ -41,7 +41,7 @@ export default function VolunteerHub() {
       <section>
         <h2 className="mb-3 text-lg font-semibold">Activities needing volunteers ({events.length})</h2>
         {events.length === 0 ? <div className="card text-slate-500">No open volunteer spots right now.</div> : (
-          <div className="grid gap-4 sm:grid-cols-2">{events.map((e) => <EventCard key={e.id} event={e} />)}</div>
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">{events.map((e) => <EventCard key={e.id} event={e} />)}</div>
         )}
       </section>
       <section className="space-y-3">

@@ -74,7 +74,7 @@ export default function EventDetail() {
   }
 
   return (
-    <div className="mx-auto max-w-4xl space-y-4">
+    <div className="mx-auto max-w-5xl space-y-4">
       <Link to="/explore" className="text-sm text-brand-700 hover:underline">← Back to Explore Activities</Link>
       <div className="card overflow-hidden p-0">
         {event.image_url ? (

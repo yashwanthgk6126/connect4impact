@@ -93,7 +93,7 @@ export default function Explore() {
       ) : (
         <>
           <p className="text-sm text-slate-500">{events.length} {events.length === 1 ? 'activity' : 'activities'} found</p>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {events.map((e) => <EventCard key={e.id} event={e} />)}
           </div>
         </>

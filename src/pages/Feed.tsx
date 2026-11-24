@@ -54,7 +54,7 @@ export default function Feed() {
   }, [load])
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[1fr_300px]">
+    <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px] xl:grid-cols-[minmax(0,1fr)_360px] xl:gap-8">
       <div className="space-y-4">
         <div>
           <h1 className="text-2xl font-bold">Home</h1>
@@ -98,7 +98,7 @@ export default function Feed() {
           <button className="btn-secondary w-full" onClick={() => load(posts.length)}>Load more</button>
         )}
       </div>
-      <aside className="space-y-4">
+      <aside className="space-y-4 lg:sticky lg:top-20 lg:self-start">
         <div className="card bg-gradient-to-br from-brand-600 to-brand-700 text-white">
           <h2 className="mb-1 text-lg font-semibold">Looking for something to do?</h2>
           <p className="mb-3 text-sm text-brand-50">Find tree plantations, food drives, blood donation camps and more near you.</p>

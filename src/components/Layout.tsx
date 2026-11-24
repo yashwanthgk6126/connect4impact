@@ -60,7 +60,7 @@ export default function Layout() {
           )}
         </div>
       </header>
-      <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-6">
+      <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-6 lg:px-8 lg:py-8">
         <Outlet />
       </main>
       <footer className="border-t border-slate-200 bg-white py-6 text-center text-sm text-slate-500">

@@ -119,15 +119,15 @@ export default function ParticipateDashboard() {
           </div>
           {find.length === 0 ? (
             <div className="card text-center text-slate-500">No matching upcoming activities. Try clearing the filters, or <Link to="/explore" className="text-brand-700 underline">browse all activities</Link>.</div>
-          ) : <div className="space-y-3">{find.map((e) => row(e, 'join'))}</div>}
+          ) : <div className="grid gap-3 xl:grid-cols-2">{find.map((e) => row(e, 'join'))}</div>}
         </>
       )}
       {tab === 'joined' && (joinedUpcoming.length === 0
         ? <div className="card text-center text-slate-500">You haven't joined any upcoming activities yet.</div>
-        : <div className="space-y-3">{joinedUpcoming.map((e) => row(e, 'leave'))}</div>)}
+        : <div className="grid gap-3 xl:grid-cols-2">{joinedUpcoming.map((e) => row(e, 'leave'))}</div>)}
       {tab === 'past' && (joinedPast.length === 0
         ? <div className="card text-center text-slate-500">No attended activities yet.</div>
-        : <div className="space-y-3">{joinedPast.map((e) => row(e, null))}</div>)}
+        : <div className="grid gap-3 xl:grid-cols-2">{joinedPast.map((e) => row(e, null))}</div>)}
     </div>
   )
 }
