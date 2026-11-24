@@ -28,10 +28,10 @@ export default function EventDetail() {
 
   const load = useCallback(async () => {
     const [{ data: ev }, { data: parts }] = await Promise.all([
-      supabase.from('events').select('*, host:profiles(id, full_name, avatar_url)').eq('id', id!).maybeSingle(),
+      supabase.from('events').select('*, host:profiles!events_host_id_fkey(id, full_name, avatar_url)').eq('id', id!).maybeSingle(),
       supabase
         .from('event_participants')
-        .select('user_id, created_at, profile:profiles(id, full_name, avatar_url)')
+        .select('user_id, created_at, profile:profiles!event_participants_user_id_fkey(id, full_name, avatar_url)')
         .eq('event_id', id!)
         .order('created_at'),
     ])

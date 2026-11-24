@@ -17,7 +17,7 @@ export default function Comments({ postId, onCountChange }: { postId: string; on
   useEffect(() => {
     supabase
       .from('comments')
-      .select('*, author:profiles(id, full_name, avatar_url)')
+      .select('*, author:profiles!comments_author_id_fkey(id, full_name, avatar_url)')
       .eq('post_id', postId)
       .order('created_at')
       .then(({ data }) => {
@@ -33,7 +33,7 @@ export default function Comments({ postId, onCountChange }: { postId: string; on
     const { data, error } = await supabase
       .from('comments')
       .insert({ post_id: postId, author_id: session.user.id, content: text.trim() })
-      .select('*, author:profiles(id, full_name, avatar_url)')
+      .select('*, author:profiles!comments_author_id_fkey(id, full_name, avatar_url)')
       .single()
     if (error) return setError(errorMessage(error))
     setComments((c) => [...c, data as Comment])

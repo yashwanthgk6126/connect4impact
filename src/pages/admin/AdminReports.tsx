@@ -25,9 +25,9 @@ interface Report {
 const SELECT = `*,
   reporter:profiles!user_reports_reporter_id_fkey(id, full_name, avatar_url),
   reported_user:profiles!user_reports_reported_user_id_fkey(id, full_name, avatar_url, is_suspended),
-  post:posts(id, title, content, status),
-  comment:comments(id, content),
-  event:events(id, title, status)`
+  post:posts!user_reports_post_id_fkey(id, title, content, status),
+  comment:comments!user_reports_comment_id_fkey(id, content),
+  event:events!user_reports_event_id_fkey(id, title, status)`
 
 export default function AdminReports() {
   const { session } = useAuth()

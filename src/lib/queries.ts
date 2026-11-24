@@ -1,9 +1,9 @@
 import { supabase } from './supabase'
 
 export const POST_SELECT =
-  '*, author:profiles(id, full_name, avatar_url), event:events(id, start_at, category, volunteers_needed, status), post_likes(count), comments(count)'
+  '*, author:profiles!posts_author_id_fkey(id, full_name, avatar_url), event:events!posts_event_id_fkey(id, start_at, category, volunteers_needed, status), post_likes(count), comments(count)'
 
-export const EVENT_SELECT = '*, host:profiles(id, full_name, avatar_url), event_participants(count)'
+export const EVENT_SELECT = '*, host:profiles!events_host_id_fkey(id, full_name, avatar_url), event_participants(count)'
 
 export async function fetchLikedPostIds(userId: string | undefined, postIds: string[]) {
   if (!userId || postIds.length === 0) return new Set<string>()

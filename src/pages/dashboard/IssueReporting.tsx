@@ -34,7 +34,7 @@ export default function IssueReporting() {
   const [error, setError] = useState('')
 
   const load = useCallback(async () => {
-    let q = supabase.from('issue_reports').select('*, reporter:profiles(id, full_name, avatar_url)').order('created_at', { ascending: false })
+    let q = supabase.from('issue_reports').select('*, reporter:profiles!issue_reports_reporter_id_fkey(id, full_name, avatar_url)').order('created_at', { ascending: false })
     if (statusFilter) q = q.eq('status', statusFilter)
     const { data } = await q
     setIssues((data as Issue[]) ?? [])

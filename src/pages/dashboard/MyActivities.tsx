@@ -20,7 +20,7 @@ export default function MyActivities() {
 
   useEffect(() => {
     Promise.all([
-      supabase.from('event_participants').select(`event:events(${EVENT_SELECT})`).eq('user_id', uid),
+      supabase.from('event_participants').select(`event:events!event_participants_event_id_fkey(${EVENT_SELECT})`).eq('user_id', uid),
       supabase.from('events').select(EVENT_SELECT).eq('host_id', uid).order('start_at', { ascending: false }),
       supabase.from('posts').select('*').eq('author_id', uid).is('event_id', null).order('created_at', { ascending: false }),
     ]).then(([j, h, p]) => {

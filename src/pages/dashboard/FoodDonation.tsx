@@ -47,7 +47,7 @@ export default function FoodDonation() {
   const load = useCallback(async () => {
     const [a, b] = await Promise.all([
       supabase.from('food_donations').select('*, donor:profiles!food_donations_donor_id_fkey(id, full_name, avatar_url)').order('created_at', { ascending: false }),
-      supabase.from('food_requests').select('*, requester:profiles(id, full_name, avatar_url)').order('created_at', { ascending: false }),
+      supabase.from('food_requests').select('*, requester:profiles!food_requests_requester_id_fkey(id, full_name, avatar_url)').order('created_at', { ascending: false }),
     ])
     setDonations((a.data as Donation[]) ?? [])
     setRequests((b.data as FoodRequest[]) ?? [])

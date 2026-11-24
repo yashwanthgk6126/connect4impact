@@ -34,7 +34,7 @@ export default function ImpactAI() {
     async function run() {
       const now = new Date().toISOString()
       const [joinedRes, upcomingRes, postsRes, hostedRes, donationsRes, issuesRes, votesRes, openIssuesRes, foodReqRes] = await Promise.all([
-        supabase.from('event_participants').select('event:events(category, location)').eq('user_id', uid),
+        supabase.from('event_participants').select('event:events!event_participants_event_id_fkey(category, location)').eq('user_id', uid),
         supabase.from('events').select(EVENT_SELECT).eq('status', 'published').gte('start_at', now).order('start_at').limit(100),
         supabase.from('posts').select('*', { count: 'exact', head: true }).eq('author_id', uid).is('event_id', null),
         supabase.from('events').select('*', { count: 'exact', head: true }).eq('host_id', uid),

@@ -30,7 +30,7 @@ export default function CivicPolls() {
   const load = useCallback(async () => {
     const { data } = await supabase
       .from('polls')
-      .select('*, creator:profiles(id, full_name, avatar_url), poll_votes(user_id, option_index)')
+      .select('*, creator:profiles!polls_creator_id_fkey(id, full_name, avatar_url), poll_votes(user_id, option_index)')
       .order('created_at', { ascending: false })
     setPolls((data as Poll[]) ?? [])
   }, [])

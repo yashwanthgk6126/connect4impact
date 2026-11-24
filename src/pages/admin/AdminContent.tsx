@@ -13,7 +13,7 @@ export default function AdminContent() {
   const load = useCallback(async () => {
     const { data } = await supabase
       .from('posts')
-      .select('*, author:profiles(id, full_name, avatar_url)')
+      .select('*, author:profiles!posts_author_id_fkey(id, full_name, avatar_url)')
       .eq('status', show)
       .order('created_at', { ascending: false })
       .limit(100)
